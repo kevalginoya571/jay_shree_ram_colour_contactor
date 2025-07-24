@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jai Shree Ram Colour Contractor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://www.transparenttextures.com/patterns/french-stucco.png');
+    }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1620207418302-439b387441b0?auto=format&fit=crop&w=1650&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <img src="https://img.icons8.com/emoji/48/paintbrush-emoji.png" alt="Logo" class="w-8 h-8"/>
+        <h1 class="text-2xl font-bold text-yellow-700">Jai Shree Ram</h1>
+      </div>
+      <nav class="space-x-6 text-yellow-800 font-medium">
+        <a href="#gallery" class="hover:underline">Gallery</a>
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero text-white py-28 text-center">
+    <div class="bg-black/50 p-8 max-w-2xl mx-auto rounded-xl">
+      <h2 class="text-4xl font-extrabold mb-3">Jai Shree Ram Colour Contractor</h2>
+      <p class="text-lg">Premium Painting | Elegant Finishes | Trusted Craftsmanship</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-center text-yellow-800 mb-6">Our Work Gallery</h2>
+
+    <div class="flex justify-center gap-4 mb-8 flex-wrap">
+      <button onclick="filterGallery('all')" class="bg-yellow-700 text-white px-4 py-2 rounded">All</button>
+      <button onclick="filterGallery('interior')" class="bg-yellow-700 text-white px-4 py-2 rounded">Interior</button>
+      <button onclick="filterGallery('exterior')" class="bg-yellow-700 text-white px-4 py-2 rounded">Exterior</button>
+      <button onclick="filterGallery('texture')" class="bg-yellow-700 text-white px-4 py-2 rounded">Texture</button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <img src="https://source.unsplash.com/400x300/?interior,paint" class="gallery-item interior rounded-lg shadow"/>
+      <img src="https://source.unsplash.com/400x300/?paint,room" class="gallery-item interior rounded-lg shadow"/>
+      <img src="https://source.unsplash.com/400x300/?texture,wall" class="gallery-item texture rounded-lg shadow"/>
+      <img src="https://source.unsplash.com/400x300/?exterior,house" class="gallery-item exterior rounded-lg shadow"/>
+      <img src="https://source.unsplash.com/400x300/?building,paint" class="gallery-item exterior rounded-lg shadow"/>
+      <img src="https://source.unsplash.com/400x300/?texture,colors" class="gallery-item texture rounded-lg shadow"/>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-white py-16">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-3xl font-bold text-yellow-800 mb-4">About Us</h2>
+      <p class="text-lg text-gray-700 leading-relaxed">
+        At <strong>Jai Shree Ram Colour Contractor</strong>, we specialize in premium painting solutions for residential and commercial spaces. With skilled painters and years of experience, we transform your walls into luxury expressions using vibrant palettes, textures, and modern techniques. Quality and perfection are our trademarks.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-3xl font-bold text-yellow-800 mb-4">Get in Touch</h2>
+      <p class="text-gray-700 mb-6 text-lg">Ready to start your dream paint project? Send us a message.</p>
+      <form class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+        <input type="text" placeholder="Name" class="p-3 border rounded" required/>
+        <input type="email" placeholder="Email" class="p-3 border rounded" required/>
+        <textarea placeholder="Your Message" rows="4" class="p-3 border rounded sm:col-span-2" required></textarea>
+        <button type="submit" class="bg-yellow-700 text-white py-2 rounded sm:col-span-2 hover:bg-yellow-800">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-yellow-800 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h3 class="text-xl font-bold">Jai Shree Ram Colour Contractor</h3>
+   
+      <div class="mt-3 space-x-4">
+        <a href="#" class="hover:underline">Facebook</a>
+        <a href="#" class="hover:underline">Instagram</a>
+        <a href="#" class="hover:underline">WhatsApp</a>
+      </div>
+      <p class="mt-4 text-sm">&copy; 2025 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Gallery Script -->
+  <script>
+    function filterGallery(category) {
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        item.style.display = category === 'all' || item.classList.contains(category) ? 'block' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>
