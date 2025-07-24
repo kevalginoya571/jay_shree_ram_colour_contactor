@@ -135,6 +135,10 @@
 
     function filterGallery(category, btn) {
   // Toggle selection
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        item.style.display = category === 'all' || item.classList.contains(category) ? 'block' : 'none';
+      });
   const buttons = document.querySelectorAll('#filterButtons button');
 
   buttons.forEach(button => {
