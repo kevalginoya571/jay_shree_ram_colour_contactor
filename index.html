@@ -138,6 +138,34 @@
         item.style.display = category === 'all' || item.classList.contains(category) ? 'block' : 'none';
       });
     }
+
+    function filterGallery(category, btn) {
+  // Toggle selection
+  const buttons = document.querySelectorAll('#filterButtons button');
+
+  buttons.forEach(button => {
+    if (button === btn && button.classList.contains('bg-yellow-900')) {
+      // Unselect if already selected
+      button.classList.remove('bg-yellow-900');
+      button.classList.add('bg-yellow-700');
+      // Optional: Show all items if unselected
+      // showAllItems();
+    } else {
+      button.classList.remove('bg-yellow-900');
+      button.classList.add('bg-yellow-700');
+    }
+  });
+
+  // Set selected button
+  if (!btn.classList.contains('bg-yellow-900')) {
+    btn.classList.remove('bg-yellow-700');
+    btn.classList.add('bg-yellow-900');
+  }
+
+  // Your existing filtering logic goes here
+  console.log("Filtering category:", category);
+}
+
   </script>
 
 </body>
