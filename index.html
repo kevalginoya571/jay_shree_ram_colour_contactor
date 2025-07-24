@@ -78,6 +78,25 @@
     </div>
     </section>
 
+  <!-- Modal with Slider -->
+  <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 hidden justify-center items-center z-50">
+    <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-3xl font-bold">&times;</button>
+    <div class="relative w-full max-w-4xl px-4">
+      <img id="modalImage" src="" class="w-full h-[500px] object-contain rounded-lg" />
+      <!-- Slider Controls -->
+      <button onclick="prevSlide()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 p-2 rounded-full text-xl text-black">
+        ◀
+      </button>
+      <button onclick="nextSlide()" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-50 p-2 rounded-full text-xl text-black">
+        ▶
+      </button>
+      <!-- Circle Indicators -->
+      <div class="flex justify-center mt-4 space-x-2" id="circleIndicators"></div>
+    </div>
+  </div>
+
+  
+
   <!-- About Section -->
   <section id="about" class="bg-white py-16">
     <div class="max-w-4xl mx-auto text-center px-4">
@@ -130,41 +149,85 @@
 
 
   <!-- Gallery Script -->
-  <script>
- 
-
+   <script>
+    // Gallery Filtering
     function filterGallery(category, btn) {
-  // Toggle selection
+      document.querySelectorAll('#filterButtons button').forEach(b => b.classList.remove('ring-2', 'ring-white'));
+      btn.classList.add('ring-2', 'ring-white');
+
       const items = document.querySelectorAll('.gallery-item');
       items.forEach(item => {
-        item.style.display = category === 'all' || item.classList.contains(category) ? 'block' : 'none';
+        if (category === 'all' || item.classList.contains(category)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
       });
-  const buttons = document.querySelectorAll('#filterButtons button');
-
-  buttons.forEach(button => {
-    if (button === btn && button.classList.contains('bg-yellow-900')) {
-      // Unselect if already selected
-      button.classList.remove('bg-yellow-900');
-      button.classList.add('bg-yellow-700');
-      // Optional: Show all items if unselected
-      // showAllItems();
-    } else {
-      button.classList.remove('bg-yellow-900');
-      button.classList.add('bg-yellow-700');
     }
-  });
 
-  // Set selected button
-  if (!btn.classList.contains('bg-yellow-900')) {
-    btn.classList.remove('bg-yellow-700');
-    btn.classList.add('bg-yellow-900');
-  }
+    // Modal Slider
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const indicators = document.getElementById('circleIndicators');
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    let currentIndex = 0;
 
-  // Your existing filtering logic goes here
-  console.log("Filtering category:", category);
-}
+    galleryItems.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        openModal();
+      });
+    });
 
+    function openModal() {
+      modal.classList.remove('hidden');
+      updateModalImage();
+      renderIndicators();
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    function updateModalImage() {
+      modalImage.src = galleryItems[currentIndex].src;
+      updateIndicators();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      updateModalImage();
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      updateModalImage();
+    }
+
+    function renderIndicators() {
+      indicators.innerHTML = '';
+      galleryItems.forEach((_, i) => {
+        const circle = document.createElement('span');
+        circle.className = `w-3 h-3 rounded-full inline-block cursor-pointer ${i === currentIndex ? 'bg-yellow-500' : 'bg-gray-400'}`;
+        circle.addEventListener('click', () => {
+          currentIndex = i;
+          updateModalImage();
+        });
+        indicators.appendChild(circle);
+      });
+    }
+
+    function updateIndicators() {
+      const circles = indicators.children;
+      Array.from(circles).forEach((circle, i) => {
+        circle.className = `w-3 h-3 rounded-full inline-block cursor-pointer ${i === currentIndex ? 'bg-yellow-500' : 'bg-gray-400'}`;
+      });
+    }
+
+    // Show all initially
+    filterGallery('all', document.querySelector('#filterButtons button'));
   </script>
+
 
 </body>
 </html>
